@@ -1,6 +1,14 @@
 @import 'scss/main.scss';
 
 .Home {
+  .Map {
+    height: 100vh;
+    width: 100vw;
+  }
+
+  .MapBox__Marker {
+    height: 30px;
+  }
 }
 
 @import './Home.media.scss';

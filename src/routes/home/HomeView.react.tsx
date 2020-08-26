@@ -1,7 +1,10 @@
 /* eslint-disable react-hooks/rules-of-hooks */
+import markerPin from 'assets/icons/marker-pin.svg';
 import Seo from 'components/Basic/Seo';
+import LatitudeLongitudeDropdowns from 'components/Specific/LatitudeLongitudeDropdowns';
 import { History, Location } from 'history';
-import React from 'react';
+import React, { useMemo, useState } from 'react';
+import ReactMapboxGl, { Marker } from 'react-mapbox-gl';
 import { match, withRouter } from 'react-router-dom';
 import { compose } from 'recompose';
 import s from './Home.module.scss';
@@ -20,10 +23,43 @@ const HomeView: React.FC<Props> = (props: Props) => {
     homeStateInit,
   );
 
+  const [coordinates, setCoordinates] = useState<[number, number]>([
+    -0.15591514,
+    51.51830379,
+  ]);
+
+  const Map = useMemo(() => {
+    return ReactMapboxGl({
+      accessToken:
+        'pk.eyJ1IjoiamVldmFuc2lkaHUiLCJhIjoiY2tlYmtpeDRhMDlqaDJxbXZmbm1pYWppeCJ9.CR6mSrmsgrji7Z4-H4sgiQ',
+    });
+  }, []);
+
+  const onClickMap = (map, evt) => {
+    setCoordinates([evt.lngLat.lng, evt.lngLat.lat]);
+  };
+
   return (
     <div className={s.Home}>
       <Seo />
-      Home
+      <Map
+        style="mapbox://styles/mapbox/streets-v9"
+        containerStyle={{
+          height: '100vh',
+          width: '100vw',
+        }}
+        center={coordinates}
+        onClick={onClickMap}
+      >
+        <Marker coordinates={coordinates} anchor="bottom" className="MarkerPin">
+          <img src={markerPin} className={s.MapBox__Marker} />
+        </Marker>
+        <LatitudeLongitudeDropdowns
+          lng={coordinates[0]}
+          lat={coordinates[1]}
+          setCoordinates={setCoordinates}
+        />
+      </Map>
     </div>
   );
 };

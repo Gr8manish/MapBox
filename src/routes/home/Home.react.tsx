@@ -4,7 +4,6 @@ import { History, Location } from 'history';
 import React from 'react';
 import { match, withRouter } from 'react-router-dom';
 import { compose } from 'recompose';
-import { useFetchHomeData } from './HomeUtil';
 import HomeView from './HomeView.react';
 
 interface Props {
@@ -15,10 +14,10 @@ interface Props {
 
 const Home: React.FC<Props> = (props: Props) => {
   const [appState] = React.useContext(AppContext);
-  const homeData = useFetchHomeData(
-    props.location.pathname,
-    props.match.params,
-  );
+  // const homeData = useFetchHomeData(
+  //   props.location.pathname,
+  //   props.match.params,
+  // );
 
   if (appState.isLoading) {
     return <LoadingView />;
