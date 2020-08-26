@@ -9,6 +9,12 @@
   .MapBox__Marker {
     height: 30px;
   }
+
+  .AutoSuggest {
+    position: absolute;
+    top: 50px;
+    left: 50px;
+  }
 }
 
 @import './Home.media.scss';

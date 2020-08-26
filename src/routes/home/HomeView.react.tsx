@@ -3,7 +3,8 @@ import markerPin from 'assets/icons/marker-pin.svg';
 import Seo from 'components/Basic/Seo';
 import LatitudeLongitudeDropdowns from 'components/Specific/LatitudeLongitudeDropdowns';
 import { History, Location } from 'history';
-import React, { useMemo, useState } from 'react';
+import React, { useCallback, useMemo, useRef, useState } from 'react';
+import Autosuggest from 'react-autosuggest';
 import ReactMapboxGl, { Marker } from 'react-mapbox-gl';
 import { match, withRouter } from 'react-router-dom';
 import { compose } from 'recompose';
@@ -23,6 +24,11 @@ const HomeView: React.FC<Props> = (props: Props) => {
     homeStateInit,
   );
 
+  const MAPBOX_TOKEN =
+    'pk.eyJ1IjoiamVldmFuc2lkaHUiLCJhIjoiY2tlYmtpeDRhMDlqaDJxbXZmbm1pYWppeCJ9.CR6mSrmsgrji7Z4-H4sgiQ';
+
+  const mapRef = useRef();
+
   const [coordinates, setCoordinates] = useState<[number, number]>([
     -0.15591514,
     51.51830379,
@@ -30,8 +36,7 @@ const HomeView: React.FC<Props> = (props: Props) => {
 
   const Map = useMemo(() => {
     return ReactMapboxGl({
-      accessToken:
-        'pk.eyJ1IjoiamVldmFuc2lkaHUiLCJhIjoiY2tlYmtpeDRhMDlqaDJxbXZmbm1pYWppeCJ9.CR6mSrmsgrji7Z4-H4sgiQ',
+      accessToken: MAPBOX_TOKEN,
     });
   }, []);
 
@@ -39,9 +44,47 @@ const HomeView: React.FC<Props> = (props: Props) => {
     setCoordinates([evt.lngLat.lng, evt.lngLat.lat]);
   };
 
+  const handleViewportChange = useCallback(newViewport => {
+    console.log('newViewport) :>> ', newViewport);
+  }, []);
+
+  const handleGeocoderViewportChange = useCallback(
+    newViewport => {
+      const geocoderDefaultOverrides = { transitionDuration: 1000 };
+
+      return handleViewportChange({
+        ...newViewport,
+        ...geocoderDefaultOverrides,
+      });
+    },
+    [handleViewportChange],
+  );
+
+  // Suggestions
+  const [suggestions, setSuggestions] = useState([]);
+  const [searchValue, setSearchValue] = useState('');
+
+  const onSuggestionsFetchRequested = () => {};
+  const getSuggestionValue = () => {};
+  const renderSuggestion = () => {};
+  const inputProps = {
+    placeholder: 'Type a programming language',
+    value: searchValue,
+    onChange: (event, { newValue }) => setSearchValue(newValue),
+  };
+
   return (
     <div className={s.Home}>
       <Seo />
+      <div className={s.AutoSuggest}>
+        <Autosuggest
+          suggestions={suggestions}
+          onSuggestionsFetchRequested={onSuggestionsFetchRequested}
+          getSuggestionValue={getSuggestionValue}
+          renderSuggestion={renderSuggestion}
+          inputProps={inputProps}
+        />
+      </div>
       <Map
         style="mapbox://styles/mapbox/streets-v9"
         containerStyle={{
@@ -50,6 +93,7 @@ const HomeView: React.FC<Props> = (props: Props) => {
         }}
         center={coordinates}
         onClick={onClickMap}
+        ref={mapRef}
       >
         <Marker coordinates={coordinates} anchor="bottom" className="MarkerPin">
           <img src={markerPin} className={s.MapBox__Marker} />
