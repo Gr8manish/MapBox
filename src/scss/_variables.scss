@@ -1,0 +1,12 @@
+/*
+Any global scss variable should be defined here.
+*/
+
+$grid-breakpoints: (
+  xs: 400px,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1600px,
+) !default;

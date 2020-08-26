@@ -1,0 +1,30 @@
+import React from 'react';
+import { Location, History } from 'history';
+import { compose } from 'recompose';
+import { withRouter } from 'react-router-dom';
+import {
+{{camelCase name}}Reducer,
+{{camelCase name}}StateInit,
+{{pascalCase name}}StateActionType,
+} from './{{pascalCase name}}Reducer';
+import s from './{{pascalCase name}}.module.scss';
+
+interface Props {
+  history?: History;
+}
+
+const {{pascalCase name}}View: React.FC<Props> = (props: Props) => {
+  const [{{camelCase name}}State, dispatch] = React.useReducer(
+    {{camelCase name}}Reducer,
+    {},
+    {{camelCase name}}StateInit,
+  );
+
+  return (
+    <div className={s.{{pascalCase name}} } >
+      {{pascalCase name}}...
+    </div>
+  );
+};
+
+export default compose<Props, Props>(withRouter)({{pascalCase name}}View);

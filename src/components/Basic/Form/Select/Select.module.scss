@@ -1,0 +1,19 @@
+@import 'scss/main.scss';
+
+.Select {
+  margin-bottom: 20px !important;
+  width: 100%;
+  border-radius: 6px;
+
+  :global {
+    .MuiOutlinedInput-root {
+      background-color: #eef1f4;
+    }
+
+    .MuiOutlinedInput-notchedOutline {
+      border: 2px solid $color-input-border;
+    }
+  }
+}
+
+@import './Select.media.scss';

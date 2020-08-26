@@ -1,0 +1,33 @@
+import { AppContext } from 'app';
+import { History, Location } from 'history';
+import React from 'react';
+import { match, withRouter } from 'react-router-dom';
+import { compose } from 'recompose';
+import LoadingView from 'components/Basic/LoadingView';
+import { useFetch{{pascalCase name}}Data } from './{{pascalCase name}}Util';
+import {{pascalCase name}}View from './{{pascalCase name}}View.react';
+
+/** Make sure to add your default props to the defaultProps object at the bottom */
+interface Props {
+  location?: Location;
+  match?: match;
+  history?: History;
+}
+
+const {{pascalCase name}}: React.FC<Props> = (props: Props) => {
+  const [appState] = React.useContext(AppContext);
+  const {{camelCase name}}Data = useFetch{{pascalCase name}}Data(
+    props.location.pathname,
+    props.match.params,
+  );
+
+  if (appState.isLoading) {
+    return <LoadingView />;
+  }
+
+  return <{{pascalCase name}}View />;
+};
+
+{{pascalCase name}}.defaultProps = {};
+
+export default compose<Props, Props>(withRouter)({{pascalCase name}});

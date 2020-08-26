@@ -1,0 +1,9 @@
+@import 'scss/main.scss';
+
+.TextFieldView {
+  margin-bottom: 20px !important;
+  width: 100%;
+  border-radius: 6px;
+}
+
+@import './TextField.media.scss';

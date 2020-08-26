@@ -1,0 +1,33 @@
+interface {{pascalCase name}}State { }
+
+enum {{pascalCase name}}StateActionType { 
+  DO_SOMETHING = 'DO_SOMETHING', 
+};
+
+type {{pascalCase name}}StateAction = {
+  type: {{pascalCase name}}StateActionType.DO_SOMETHING; actionSpecificArg: string;
+};
+
+const {{camelCase name}}StateInit = (
+  initialState: {{pascalCase name}}State,
+): {{pascalCase name}}State => {
+  return {
+    ...initialState
+  };
+};
+
+const {{camelCase name}}Reducer = (
+  state: {{pascalCase name}}State,
+  action: {{pascalCase name}}StateAction,
+): {{pascalCase name}}State => {
+  switch (action.type) {
+    default:
+      return state;
+  }
+};
+
+export {
+  {{pascalCase name}}StateActionType,
+  {{camelCase name}}StateInit,
+  {{camelCase name}}Reducer,
+};

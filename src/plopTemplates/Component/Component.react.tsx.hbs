@@ -1,0 +1,21 @@
+import React from 'react';
+import {{pascalCase name}}View from './{{pascalCase name}}View.react'
+import { compose } from 'recompose';
+import { withRouter } from 'react-router-dom';
+import { History } from 'history';
+
+
+interface Props {
+  history?: History;
+}
+
+const {{pascalCase name}}: React.FC<Props> = (props: Props) => {
+  return (
+    <{{pascalCase name}}View {...props} />
+  );
+};
+
+{{pascalCase name}}.defaultProps = {
+}
+
+export default compose<Props, Props>(withRouter)({{pascalCase name}});

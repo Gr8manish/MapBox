@@ -1,0 +1,41 @@
+import React from 'react';
+
+interface {{pascalCase name}}Data {
+  isLoading: boolean;
+  error?: Error;
+}
+
+const useFetch{{pascalCase name}}Data = (
+  pathname: string,
+  matchParams: {},
+): {{pascalCase name}}Data => {
+const [data, updateData] = React.useState<{{pascalCase name}}Data>({
+  isLoading: true,
+});
+
+  const fetchData = async (): Promise<void> => {
+    try {
+      updateData({
+        ...data,
+        isLoading: false,
+      });
+    } catch (error) {
+      console.log(`RouteFetchDataError: ${error}`);
+      updateData({
+        ...data,
+        isLoading: false,
+        error: error,
+        });
+      }
+    };
+
+    React.useEffect(() => {
+      fetchData();
+    }, []);
+
+  return data;
+};
+
+export {
+  useFetch{{pascalCase name}}Data
+};

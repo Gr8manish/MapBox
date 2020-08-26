@@ -1,0 +1,17 @@
+{
+  "editor.formatOnSave": true,
+  "[scss]": {
+    "editor.formatOnSave": true
+  },
+  "files.eol": "\n",
+  "eslint.alwaysShowStatus": true,
+  "window.zoomLevel": 0,
+  "extensions.ignoreRecommendations": false,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true,
+    "source.organizeImports": true
+  },
+  "[handlebars]": {
+    "editor.formatOnSave": false
+  }
+}
