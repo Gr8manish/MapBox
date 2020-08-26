@@ -1,0 +1,17 @@
+@import 'scss/main.scss';
+
+.LatitudeLongitudeDropdowns {
+  position: absolute;
+  position: absolute;
+  bottom: 50px;
+  left: 50px;
+  z-index: 1000;
+  background-color: #ffffffdb;
+  padding: 20px;
+
+  .Latitude {
+    margin-right: 10px;
+  }
+}
+
+@import './LatitudeLongitudeDropdowns.media.scss';
