@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import markerPin from 'assets/icons/marker-pin.svg';
 import Seo from 'components/Basic/Seo';
-import LatitudeLongitudeDropdowns from 'components/Specific/LatitudeLongitudeDropdowns';
+import LatitudeLongitudeDropdowns from 'components/LatitudeLongitudeDropdowns';
 import { History, Location } from 'history';
 import React, { useCallback, useMemo, useRef, useState } from 'react';
 import Autosuggest from 'react-autosuggest';
@@ -76,6 +76,7 @@ const HomeView: React.FC<Props> = (props: Props) => {
   return (
     <div className={s.Home}>
       <Seo />
+      {/* TODO: Search by address */}
       <div className={s.AutoSuggest}>
         <Autosuggest
           suggestions={suggestions}
@@ -85,6 +86,8 @@ const HomeView: React.FC<Props> = (props: Props) => {
           inputProps={inputProps}
         />
       </div>
+
+      {/* MapBox */}
       <Map
         style="mapbox://styles/mapbox/streets-v9"
         containerStyle={{
@@ -98,6 +101,8 @@ const HomeView: React.FC<Props> = (props: Props) => {
         <Marker coordinates={coordinates} anchor="bottom" className="MarkerPin">
           <img src={markerPin} className={s.MapBox__Marker} />
         </Marker>
+
+        {/* Latitude and Longitude Input box */}
         <LatitudeLongitudeDropdowns
           lng={coordinates[0]}
           lat={coordinates[1]}
