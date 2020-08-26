@@ -23,6 +23,11 @@ const LatitudeLongitudeDropdownsView: React.FC<Props> = (props: Props) => {
     latitudeLongitudeDropdownsStateInit,
   );
 
+  const isLatLongValid = str => {
+    var reg = new RegExp('^-?([1-8]?[1-9]|[1-9]0).{1}d{1,6}');
+    return reg.test(str);
+  };
+
   return (
     <div className={s.LatitudeLongitudeDropdowns}>
       <div>
@@ -33,7 +38,9 @@ const LatitudeLongitudeDropdownsView: React.FC<Props> = (props: Props) => {
           value={props.lat}
           className={s.Latitude}
           onChange={e => {
-            props.setCoordinates([props.lng, Number(e.target.value)]);
+            if (/^-?([1-8]?[1-9]|[1-9]0)\.{1}\d{1,15}/g.test(e.target.value)) {
+              props.setCoordinates([props.lng, Number(e.target.value)]);
+            }
           }}
         />
         <TextField
@@ -42,7 +49,9 @@ const LatitudeLongitudeDropdownsView: React.FC<Props> = (props: Props) => {
           variant={'outlined'}
           value={props.lng}
           onChange={e => {
-            props.setCoordinates([Number(e.target.value), props.lat]);
+            if (/^-?(([-+]?)([\d]{1,3})((\.)(\d+))?)/g.test(e.target.value)) {
+              props.setCoordinates([Number(e.target.value), props.lat]);
+            }
           }}
         />
       </div>
