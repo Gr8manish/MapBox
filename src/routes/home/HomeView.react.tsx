@@ -25,7 +25,7 @@ const HomeView: React.FC<Props> = (props: Props) => {
   );
 
   const MAPBOX_TOKEN =
-    'pk.eyJ1IjoiamVldmFuc2lkaHUiLCJhIjoiY2tlYmtpeDRhMDlqaDJxbXZmbm1pYWppeCJ9.CR6mSrmsgrji7Z4-H4sgiQ';
+    'pk.eyJ1IjoiamVldmFuc2lkaHUiLCJhIjoiY2tlYmtpeDRhMDlqaDJxbXZmbm1pYWppeCJ9.CR6mSrmsgrji7Z4';
 
   const mapRef = useRef();
 
